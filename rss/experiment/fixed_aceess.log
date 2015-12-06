@@ -1,0 +1,22 @@
+[ 8235.555745] Module inserted
+[ 8239.012413] virtual_mem=2012kB,	rss=808kB
+[ 8242.012227] virtual_mem=2012kB,	rss=808kB
+[ 8245.012223] virtual_mem=2012kB,	rss=808kB
+Here,memory allocated and went for sleep:-
+[ 8248.012447] virtual_mem=18020kB,	rss=1068kB
+Memory traversal starts:-
+[ 8251.012222] virtual_mem=18020kB,	rss=17260kB
+[ 8254.012227] virtual_mem=18020kB,	rss=17260kB
+[ 8257.012414] virtual_mem=18020kB,	rss=17260kB
+[ 8260.012234] virtual_mem=18020kB,	rss=17260kB
+[ 8263.020719] virtual_mem=18020kB,	rss=17260kB
+[ 8266.012223] virtual_mem=18020kB,	rss=17260kB
+[ 8269.012259] virtual_mem=18020kB,	rss=17260kB
+[ 8272.012239] virtual_mem=18020kB,	rss=17260kB
+[ 8275.012207] virtual_mem=18020kB,	rss=17260kB
+memory as been freed.
+[ 8278.012233] virtual_mem=2016kB,	rss=1256kB
+process terminated
+[ 8281.008264] task_struct is NULL
+module unloaded
+[ 8454.242757] Module Unloaded.

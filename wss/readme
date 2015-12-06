@@ -1,0 +1,23 @@
+follow steps for running wss experiment:-
+	make
+	cd experiment
+	gcc test_fixed_size.c -o fixed
+	gcc test_var_size.c -o varying
+	sudo dmesg -C
+
+Now run these object files and load wss module.
+
+	sudo insmod ../wss.ko pid=<pid of above process>
+
+
+wss.c -----> 
+	-Every 2 sec timeout occurs and it clears the present bit and sets protnone bit in pte, after this virtual memory walk, it prints the wss size(in KB) during the last time span of 2 sec.
+	-during page fault of specified process, our hook function will be called. In this hook function, filtering is done to verify that page fault is happening because of previous settings only. If it is then present bit will be set and protnone bit will be cleared and also wss counter will be increased.
+	-on module unload the bit setting will be undone.
+
+#############   Experiment Directory    ###############
+
+see readme file and .log file to verify correctness.
+Below both cases have been verified
+	1)first page fault should not increment wss count
+	2)wss count is correct.

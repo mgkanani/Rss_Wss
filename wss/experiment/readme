@@ -1,0 +1,27 @@
+test_var_size.c :-
+	There are 10 iteration. In each iteration,it does followings:-
+		1)for iterate_count i, allocates i*4MB memory
+		2)sleep(5)
+		3)1st for loop which accesses once each page of previously allocated memory.
+		4)sleep(4)
+		5)2nd for loop accesses all pages from previous allocation.
+		6)sleep(4)
+		7)3rd for loop only accesses half number of pages from previous allocation.
+		8)sleep(8)
+		9)free()
+		10)sleep(4)
+	Expected output:-
+		-After step(1) only vma should increase by ~i*4MB
+		-After step(3) only rss should increase by ~i*4MB but not wss because we are not considering first page fault into wss count.
+		-After step(5) wss should increase by ~i*4MB
+		-After step(7) wss should be halfen of wss after step(5).
+		-After step(9) vma and rss should decrease by ~i*4MB.
+	Actual output:-
+		see test_var_size.log file, It is as per expectation. log file has been explained within it.
+
+
+Correctness:-
+1) first page fault is not incrementing wss count:-
+	In log file see the outcome after 1st for loop
+2) wss count give correct value:-
+	In log file compare the wss size of 2nd-for-loop and 3rd-for-loop. In 3rd-for-loop, the wss size is halfened than 2nd-for-loop since it is actually accesses half pages than 2nd-for-loop.

@@ -1,0 +1,101 @@
+Each process has its task_structure which contains the required information about this process like pid,children,parent,memory layout etc..
+Within task_struct, mm contains the memory layout of this process. It also contains pgd(pointer to process entry in page global directory) and vma (virtual memory structure). Os only assigns some pages based on memory pressure to a process. For executing a process not all pages are required all the time. So remaining pages will not be present in physical memory. Whenever they are referenced/required they will be brought by kernel. Virtual memory is actual memory required for executing the task. To map virtual address to physical address, paging is used.
+
+In paging there is global page directory which contains the entry for page tables for every process. Generally, the size of this page directory is 4KB. Each entry is of 32-bit. 
+For specific virtual address, the physical address is obtained by page directory walk.
+Upper 20 bit of page directory and Right most 10 bit of virtual address are used to locate page table entry till 12 bit remains in virtual address.  In last step the obtained address is page table entry. If page is within physical memory then the actual location will be the conjuction of upper 20bit of pte and 12bit of virtual address. The 12 bit in pte are used for specific purpose.
+
+There are certain bits:-
+_PAGE_PRESENT	Page is resident in memory and not swapped out
+_PAGE_PROTNONE	Page is resident but not accessable from userspace
+_PAGE_RW	Set if the page may be written to
+_PAGE_USER	Set if the page is accessible from user space
+_PAGE_DIRTY	Set if the page is written to
+_PAGE_ACCESSED	Set if the page is accessed
+
+
+###################  RSS #####################
+
+Resident Set Size :- It is the size of memory which has been actually allocated to a process.
+
+Calculating RSS:-
+calculating rss, we simply traverse the virtual address and check corresponding page table entry'bits for determining whether page is within memory or not.
+
+For calculating rss of a process, we do not need to modify the source code.
+We can calculate it using our separate module.
+Approach used:-
+        For a process, we will iterate on virtual address and fetch page table entry if there is any exist. Once we got the pte for specified virtual address ,we can check whether the page is actually within physical memory or not.
+
+Implementation:-
+process_id -> task_struct -> mm -> vma -> addr = { [vm_start,vm_end) + PAGE_SIZE }
+                                |   ^
+                                |    \
+                                |     \
+                                |-> vma=(vma->next)
+
+In mm struct there is one attribute named pgd which is actually pointer to location in page global directory for this process.
+Based on virtaul address and mm_struct we can find page table entry.
+pud --> page upper directory
+pmd --> page middle directory
+pte -->page table entry
+
+
+pdg_offset(mm,addr) -> pgd_e *
+                        |
+            pud_offset(___, addr) -> pud_e *
+                                        |
+                            pmd_offset(___, addr) -> pmd_e *
+                                                        |
+                                        pte_offset_map(___, addr) -> pte_e *
+
+pte_present method check for either of present bit or protnone bit has been set for page table entry. If it is set then return true/1.
+So to check page is within memory or not call pte_present(). If page found then increment count. Since we are adding PAGE_SIZE into addr during virtual address iteration. For each page, only one count will be incremented.
+
+
+################ WSS ###################
+Calculatting WSS:-
+
+In pte, there are two bits called "_PAGE_PRESENT" and "_PAGE_PROTNONE". PROTNONE bit specifies that page is present but not accessible from userspace. To force page fault though page is within memory, we can clear present bit and set protnone bit.
+Whenever page fault generated it calls do_page_fault() method.
+	do_page_fault() -> __do_page_fault().
+within __do_page_fault(), I put my hook function with arguments(pid,mm,addr). First I am checking that the page fault is for interested process, then page table entry is retrived for this specified virtual address. Then It is checking that present bit is 0 and protnone bit is set. If it is then increment the wss count.
+
+
+Tree structure:-
+	.
+	|-->understanding.txt
+	|-->patch
+	|-->wss
+	    |->wss.c
+	    |->Makefile
+	    |->readme
+	    |->experiment
+			|->test_var_size.c
+			|->log_var_size.txt
+			|->readme
+
+	|-->rss
+	    |->rss.c
+	    |->Makefile
+	    |->readme
+	    |->experiment
+			|->create_access_delete.c
+			|->create_access_delete.log
+			|->fixed_aceess.c
+			|->fixed_aceess.log
+			|->noaccess.c
+			|->noaccess.log
+
+
+
+Declaration:-
+	I(Mahendra Kanani-133059006) and Nilang Shah have discussed different approaches for solving these problems. But we have not shared the code.
+
+Note:- The patch is for x86 architecture only.
+
+
+
+applying patch:-
+goto src directory of linux-3.18.1 and run below command.
+	patch -p1 < [location of "patch"file]
+

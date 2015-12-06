@@ -1,0 +1,100 @@
+[ 9772.904395] Module inserted
+[ 9776.000603] virtual_mem=2012kB,	rss=864kB
+[ 9778.992563] virtual_mem=2012kB,	rss=864kB
+[ 9781.992642] virtual_mem=2012kB,	rss=864kB
+[ 9784.992567] virtual_mem=2012kB,	rss=864kB
+
+4MB memory allocated,sleep(5):- so vma incresed ~4MB but not rss.
+
+[ 9787.992583] virtual_mem=6020kB,	rss=1188kB
+
+memory accessed(~4MB) :- rss incresed ~4MB
+
+[ 9790.992607] virtual_mem=6020kB,	rss=5188kB
+[ 9793.992718] virtual_mem=6020kB,	rss=5188kB
+
+free(),sleep(10) :- both vma and rss decreased ~4MB
+
+[ 9796.992639] virtual_mem=2016kB,	rss=1184kB
+[ 9799.992652] virtual_mem=2016kB,	rss=1184kB
+[ 9802.992576] virtual_mem=2016kB,	rss=1184kB
+
+8MB memory allocated,sleep(5) :- only vma incresed ~8MB
+
+[ 9805.992656] virtual_mem=10020kB,	rss=1188kB
+[ 9808.992655] virtual_mem=10020kB,	rss=1188kB
+
+memory accessed(~8MB) then sleep(5) :- rss also incresed ~8MB
+
+[ 9811.992767] virtual_mem=10020kB,	rss=9188kB
+[ 9814.992724] virtual_mem=10020kB,	rss=9188kB
+
+free() then sleep(10)
+
+[ 9817.992615] virtual_mem=2016kB,	rss=1184kB
+[ 9820.992634] virtual_mem=2016kB,	rss=1184kB
+[ 9823.992554] virtual_mem=2016kB,	rss=1184kB
+
+12MB allocated, then sleep(5)
+
+[ 9826.992686] virtual_mem=14020kB,	rss=1188kB
+[ 9829.992670] virtual_mem=14020kB,	rss=1188kB
+
+memory accessed(~12MB) then sleep(5)
+
+[ 9832.992290] virtual_mem=14020kB,	rss=13188kB
+free() and so on...
+[ 9835.992600] virtual_mem=2016kB,	rss=1184kB
+[ 9838.992443] virtual_mem=2016kB,	rss=1184kB
+[ 9841.992351] virtual_mem=2016kB,	rss=1184kB
+[ 9844.992594] virtual_mem=2016kB,	rss=1184kB
+[ 9847.992697] virtual_mem=18020kB,	rss=1188kB
+[ 9850.996469] virtual_mem=18020kB,	rss=17188kB
+[ 9853.996278] virtual_mem=18020kB,	rss=17188kB
+[ 9856.992520] virtual_mem=2016kB,	rss=1184kB
+[ 9859.992580] virtual_mem=2016kB,	rss=1184kB
+[ 9862.992550] virtual_mem=2016kB,	rss=1184kB
+[ 9865.992691] virtual_mem=22020kB,	rss=1188kB
+[ 9868.992507] virtual_mem=22020kB,	rss=1188kB
+[ 9871.996459] virtual_mem=22020kB,	rss=21188kB
+[ 9874.996313] virtual_mem=22020kB,	rss=21188kB
+[ 9877.992402] virtual_mem=2016kB,	rss=1184kB
+[ 9880.993977] virtual_mem=2016kB,	rss=1184kB
+[ 9883.992593] virtual_mem=2016kB,	rss=1184kB
+[ 9886.992734] virtual_mem=26020kB,	rss=1188kB
+[ 9889.992693] virtual_mem=26020kB,	rss=1188kB
+[ 9892.996333] virtual_mem=26020kB,	rss=25188kB
+[ 9895.992570] virtual_mem=2016kB,	rss=1184kB
+[ 9898.992631] virtual_mem=2016kB,	rss=1184kB
+[ 9901.992625] virtual_mem=2016kB,	rss=1184kB
+[ 9904.992568] virtual_mem=2016kB,	rss=1184kB
+[ 9907.992736] virtual_mem=30020kB,	rss=1188kB
+[ 9910.996493] virtual_mem=30020kB,	rss=29188kB
+[ 9913.996288] virtual_mem=30020kB,	rss=29188kB
+[ 9916.992641] virtual_mem=2016kB,	rss=1184kB
+[ 9919.992538] virtual_mem=2016kB,	rss=1184kB
+[ 9922.992596] virtual_mem=2016kB,	rss=1184kB
+[ 9925.996540] virtual_mem=34020kB,	rss=1188kB
+[ 9928.996527] virtual_mem=34020kB,	rss=1188kB
+[ 9931.996553] virtual_mem=34020kB,	rss=33188kB
+[ 9934.996527] virtual_mem=34020kB,	rss=33188kB
+[ 9937.992666] virtual_mem=2016kB,	rss=1184kB
+[ 9940.992574] virtual_mem=2016kB,	rss=1184kB
+[ 9943.992571] virtual_mem=2016kB,	rss=1184kB
+[ 9946.992733] virtual_mem=38020kB,	rss=1188kB
+[ 9949.992655] virtual_mem=38020kB,	rss=1188kB
+[ 9952.996475] virtual_mem=38020kB,	rss=37188kB
+[ 9955.996478] virtual_mem=38020kB,	rss=37188kB
+[ 9958.992342] virtual_mem=2016kB,	rss=1184kB
+[ 9961.992334] virtual_mem=2016kB,	rss=1184kB
+[ 9964.994757] virtual_mem=2016kB,	rss=1184kB
+[ 9967.992775] virtual_mem=42020kB,	rss=1188kB
+[ 9970.992694] virtual_mem=42020kB,	rss=1188kB
+[ 9973.996554] virtual_mem=42020kB,	rss=41188kB
+[ 9976.992391] virtual_mem=2016kB,	rss=1184kB
+[ 9979.992628] virtual_mem=2016kB,	rss=1184kB
+[ 9982.992654] virtual_mem=2016kB,	rss=1184kB
+[ 9985.992609] virtual_mem=2016kB,	rss=1184kB
+[ 9988.992582] virtual_mem=2016kB,	rss=1184kB
+[ 9991.992548] task_struct is NULL
+[10106.888313] Module Unloaded.

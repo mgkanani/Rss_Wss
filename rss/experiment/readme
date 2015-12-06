@@ -1,0 +1,31 @@
+noaccess.c :- 
+	There are 10 iterations. For each iteration, it first allocates memory then sleeps for 4 sec then frees and again sleeps for 8 sec.
+	In each successive iteration the size of memory increases by 4000KB. 
+	Since there is not any memory aceess, the rss size should remain same. This can be verified by observing noaccess.log file.
+
+	See in log file(noaccess.log), at every 12 sec vma size increase but rss remains almost same.
+
+fixed_access.c :- 
+	It does followings:-
+		1)allocates ~16MB memory and sleep for 5 sec
+		2)4 round of memory access,sleep(5) in between each round
+		3)frees the memory.
+	Expected output:-
+		rss size should not increase after step (1).
+		rss size should be ~16MB during step (2).
+		rss size should be decrease to initial size after (3).
+	Actual output:- (see fixed_aceess.log)
+		It is as per expectation.
+
+create_access_delete.c :-
+	There are 10 iterations, During each iteration, it does followings:-
+		1)allocates 4MB*[iteration_number] memory and sleep(5) e.g. In 2nd iteration, it allocates 4MB*2=8MB memory.
+		2)visits memory then sleep(5)
+		3)free the previously allocated memory.
+		4)sleep(10)
+	Expected output:-
+		vma should increase but not rss during step 1.
+		rss should increase in step 2
+		both vma and rss should decrease after step(3).
+	Actual output:-
+		see create_access_delete.log

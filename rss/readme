@@ -1,0 +1,17 @@
+Understanding content is in "readme" file locatede in upper directory.
+follow steps for running rss experiment:-
+	make
+	cd experiment
+	gcc testing.c
+	sudo dmesg -C
+	./a.out &
+	sudo insmod ../rss.ko pid=<pid of above process>
+//concurrently check top -p <pid of a.out> and compare virtual and rss with dmesg's last row.
+	sudo rmmod ../rss.ko #when process a.out completes.
+	dmesg > all_log.txt
+
+On every 3 sec, our module calculates vm and rss size for given process.
+This module traverses the entire virtual memory area and searches for page table entry corresponding to that adrress. 
+If there is pte then it checks whether page is actually present in memory or not. If it is then increment rss count.
+
+for correctness check experiment directory.

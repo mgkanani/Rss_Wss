@@ -1,0 +1,161 @@
+[12354.676207] Module inserted
+[12356.993145] virtual_mem=2012kB,	rss=804kB,	wss=0kB
+[12358.992801] virtual_mem=2012kB,	rss=804kB,	wss=0kB
+[12360.992636] virtual_mem=2012kB,	rss=804kB,	wss=0kB
+
+~4MB memory allocated, so only vma size is increased.
+[12362.994772] virtual_mem=6020kB,	rss=1128kB,	wss=184kB
+
+sleep(5)
+[12364.994431] virtual_mem=6020kB,	rss=1128kB,	wss=0kB
+[12366.994772] virtual_mem=6020kB,	rss=1128kB,	wss=0kB
+
+first for loop accessed all pages, so it will cause page fault and due to this, physical pages are assigned. So rss size increased but not wss size.
+[12368.994557] virtual_mem=6020kB,	rss=5124kB,	wss=36kB
+
+sleep(4)
+[12370.995043] virtual_mem=6020kB,	rss=5124kB,	wss=0kB
+
+2nd for loop accesses all pages in 4MB memory, now this pages are already within memory so wss size has been increased to ~4MB.
+[12372.995043] virtual_mem=6020kB,	rss=5124kB,	wss=4032kB
+
+sleep(4)
+[12374.994608] virtual_mem=6020kB,	rss=5124kB,	wss=0kB
+
+3rd for loop accesses only half of 4MB memory, so wss size will be increase to ~2MB.
+[12376.993776] virtual_mem=6020kB,	rss=5124kB,	wss=2036kB
+
+sleep(8)
+[12378.995022] virtual_mem=6020kB,	rss=5124kB,	wss=0kB
+[12380.994632] virtual_mem=6020kB,	rss=5124kB,	wss=0kB
+[12382.994934] virtual_mem=6020kB,	rss=5124kB,	wss=0kB
+
+free(), so vma and rss set to initial value(value before malloc call). Then sleep(4)
+[12384.992545] virtual_mem=2016kB,	rss=1124kB,	wss=128kB
+[12386.992604] virtual_mem=2016kB,	rss=1124kB,	wss=0kB
+
+~8MB memory allocated, but not accessed
+[12388.992635] virtual_mem=10020kB,	rss=1128kB,	wss=64kB
+[12390.992641] virtual_mem=10020kB,	rss=1128kB,	wss=0kB
+
+1st for-loop accessed allocated memory, so rss incresed, Initial page fault has not incremented in wss size.
+[12392.996951] virtual_mem=10020kB,	rss=9124kB,	wss=36kB
+[12394.996894] virtual_mem=10020kB,	rss=9124kB,	wss=0kB
+
+2nd will cause increment in wss size to ~8MB.
+[12396.996329] virtual_mem=10020kB,	rss=9124kB,	wss=8032kB
+[12398.996810] virtual_mem=10020kB,	rss=9124kB,	wss=0kB
+
+3rd for loop only accesses half of ~8MB pages , so wss is half of the previous one.
+[12400.996465] virtual_mem=10020kB,	rss=9124kB,	wss=4036kB
+[12402.996531] virtual_mem=10020kB,	rss=9124kB,	wss=0kB
+[12404.996300] virtual_mem=10020kB,	rss=9124kB,	wss=0kB
+[12406.996475] virtual_mem=10020kB,	rss=9124kB,	wss=0kB
+
+free(), and so on....
+[12408.992690] virtual_mem=2016kB,	rss=1124kB,	wss=64kB
+[12410.992621] virtual_mem=2016kB,	rss=1124kB,	wss=0kB
+[12412.992636] virtual_mem=14020kB,	rss=1128kB,	wss=64kB
+[12414.992675] virtual_mem=14020kB,	rss=1128kB,	wss=0kB
+[12416.992572] virtual_mem=14020kB,	rss=1128kB,	wss=0kB
+[12418.996231] virtual_mem=14020kB,	rss=13124kB,	wss=36kB
+[12420.996233] virtual_mem=14020kB,	rss=13124kB,	wss=0kB
+[12422.996247] virtual_mem=14020kB,	rss=13124kB,	wss=12032kB
+[12424.996497] virtual_mem=14020kB,	rss=13124kB,	wss=0kB
+[12426.996516] virtual_mem=14020kB,	rss=13124kB,	wss=6036kB
+[12428.996521] virtual_mem=14020kB,	rss=13124kB,	wss=0kB
+[12430.996471] virtual_mem=14020kB,	rss=13124kB,	wss=0kB
+[12432.996532] virtual_mem=14020kB,	rss=13124kB,	wss=0kB
+[12434.992673] virtual_mem=2016kB,	rss=1124kB,	wss=64kB
+[12436.992404] virtual_mem=2016kB,	rss=1124kB,	wss=0kB
+[12438.992661] virtual_mem=18020kB,	rss=1128kB,	wss=64kB
+[12440.992689] virtual_mem=18020kB,	rss=1128kB,	wss=0kB
+[12442.996522] virtual_mem=18020kB,	rss=17124kB,	wss=36kB
+[12444.996479] virtual_mem=18020kB,	rss=17124kB,	wss=0kB
+[12446.996520] virtual_mem=18020kB,	rss=17124kB,	wss=16032kB
+[12448.996506] virtual_mem=18020kB,	rss=17124kB,	wss=0kB
+[12450.996462] virtual_mem=18020kB,	rss=17124kB,	wss=8036kB
+[12452.996524] virtual_mem=18020kB,	rss=17124kB,	wss=0kB
+[12454.996531] virtual_mem=18020kB,	rss=17124kB,	wss=0kB
+[12456.996479] virtual_mem=18020kB,	rss=17124kB,	wss=0kB
+[12458.992681] virtual_mem=2016kB,	rss=1124kB,	wss=64kB
+[12460.992637] virtual_mem=2016kB,	rss=1124kB,	wss=0kB
+[12462.992717] virtual_mem=22020kB,	rss=1128kB,	wss=64kB
+[12464.992680] virtual_mem=22020kB,	rss=1128kB,	wss=0kB
+[12466.992514] virtual_mem=22020kB,	rss=1128kB,	wss=0kB
+[12468.996474] virtual_mem=22020kB,	rss=21124kB,	wss=36kB
+[12470.996475] virtual_mem=22020kB,	rss=21124kB,	wss=0kB
+[12472.996475] virtual_mem=22020kB,	rss=21124kB,	wss=20032kB
+[12474.996239] virtual_mem=22020kB,	rss=21124kB,	wss=0kB
+[12476.996486] virtual_mem=22020kB,	rss=21124kB,	wss=10040kB
+[12478.996550] virtual_mem=22020kB,	rss=21124kB,	wss=0kB
+[12480.996504] virtual_mem=22020kB,	rss=21124kB,	wss=0kB
+[12482.996279] virtual_mem=22020kB,	rss=21124kB,	wss=0kB
+[12484.992711] virtual_mem=2016kB,	rss=1124kB,	wss=64kB
+[12486.992630] virtual_mem=2016kB,	rss=1124kB,	wss=0kB
+[12488.992747] virtual_mem=26020kB,	rss=1128kB,	wss=64kB
+[12490.992716] virtual_mem=26020kB,	rss=1128kB,	wss=0kB
+[12492.996244] virtual_mem=26020kB,	rss=25124kB,	wss=36kB
+[12494.996324] virtual_mem=26020kB,	rss=25124kB,	wss=0kB
+[12496.996474] virtual_mem=26020kB,	rss=25124kB,	wss=24032kB
+[12498.996486] virtual_mem=26020kB,	rss=25124kB,	wss=0kB
+[12500.996426] virtual_mem=26020kB,	rss=25124kB,	wss=12040kB
+[12502.996481] virtual_mem=26020kB,	rss=25124kB,	wss=0kB
+[12504.996520] virtual_mem=26020kB,	rss=25124kB,	wss=0kB
+[12506.996534] virtual_mem=26020kB,	rss=25124kB,	wss=0kB
+[12508.992491] virtual_mem=2016kB,	rss=1124kB,	wss=64kB
+[12510.992617] virtual_mem=2016kB,	rss=1124kB,	wss=0kB
+[12512.992733] virtual_mem=30020kB,	rss=1128kB,	wss=64kB
+[12514.992649] virtual_mem=30020kB,	rss=1128kB,	wss=0kB
+[12516.992733] virtual_mem=30020kB,	rss=1128kB,	wss=0kB
+[12518.996485] virtual_mem=30020kB,	rss=29124kB,	wss=36kB
+[12520.996487] virtual_mem=30020kB,	rss=29124kB,	wss=0kB
+[12522.996412] virtual_mem=30020kB,	rss=29124kB,	wss=28032kB
+[12524.996283] virtual_mem=30020kB,	rss=29124kB,	wss=0kB
+[12526.996468] virtual_mem=30020kB,	rss=29124kB,	wss=14040kB
+[12528.996552] virtual_mem=30020kB,	rss=29124kB,	wss=0kB
+[12530.996502] virtual_mem=30020kB,	rss=29124kB,	wss=0kB
+[12532.996512] virtual_mem=30020kB,	rss=29124kB,	wss=0kB
+[12534.992664] virtual_mem=2016kB,	rss=1124kB,	wss=64kB
+[12536.992663] virtual_mem=2016kB,	rss=1124kB,	wss=0kB
+[12538.992494] virtual_mem=34020kB,	rss=1128kB,	wss=64kB
+[12540.992486] virtual_mem=34020kB,	rss=1128kB,	wss=0kB
+[12542.992321] virtual_mem=34020kB,	rss=1128kB,	wss=0kB
+[12544.996508] virtual_mem=34020kB,	rss=33124kB,	wss=36kB
+[12546.996476] virtual_mem=34020kB,	rss=33124kB,	wss=0kB
+[12548.996530] virtual_mem=34020kB,	rss=33124kB,	wss=32032kB
+[12550.996508] virtual_mem=34020kB,	rss=33124kB,	wss=0kB
+[12552.996461] virtual_mem=34020kB,	rss=33124kB,	wss=16040kB
+[12555.019198] virtual_mem=34020kB,	rss=33124kB,	wss=0kB
+[12556.996282] virtual_mem=34020kB,	rss=33124kB,	wss=0kB
+[12558.996435] virtual_mem=34020kB,	rss=33124kB,	wss=0kB
+[12560.992614] virtual_mem=2016kB,	rss=1124kB,	wss=64kB
+[12562.992581] virtual_mem=2016kB,	rss=1124kB,	wss=0kB
+[12564.992801] virtual_mem=38020kB,	rss=1128kB,	wss=64kB
+[12566.992678] virtual_mem=38020kB,	rss=1128kB,	wss=0kB
+[12568.996242] virtual_mem=38020kB,	rss=37124kB,	wss=36kB
+[12570.996589] virtual_mem=38020kB,	rss=37124kB,	wss=0kB
+[12572.996453] virtual_mem=38020kB,	rss=37124kB,	wss=36032kB
+[12574.996548] virtual_mem=38020kB,	rss=37124kB,	wss=0kB
+[12576.996566] virtual_mem=38020kB,	rss=37124kB,	wss=18044kB
+[12578.996468] virtual_mem=38020kB,	rss=37124kB,	wss=0kB
+[12580.996335] virtual_mem=38020kB,	rss=37124kB,	wss=0kB
+[12582.996556] virtual_mem=38020kB,	rss=37124kB,	wss=0kB
+[12584.992616] virtual_mem=2016kB,	rss=1124kB,	wss=64kB
+[12586.992661] virtual_mem=2016kB,	rss=1124kB,	wss=0kB
+[12588.992717] virtual_mem=42020kB,	rss=1128kB,	wss=64kB
+[12590.992780] virtual_mem=42020kB,	rss=1128kB,	wss=0kB
+[12592.992757] virtual_mem=42020kB,	rss=1128kB,	wss=0kB
+[12594.996501] virtual_mem=42020kB,	rss=41124kB,	wss=36kB
+[12596.996529] virtual_mem=42020kB,	rss=41124kB,	wss=0kB
+[12598.996473] virtual_mem=42020kB,	rss=41124kB,	wss=40032kB
+[12600.996475] virtual_mem=42020kB,	rss=41124kB,	wss=0kB
+[12602.996525] virtual_mem=42020kB,	rss=41124kB,	wss=20044kB
+[12604.996276] virtual_mem=42020kB,	rss=41124kB,	wss=0kB
+[12606.996530] virtual_mem=42020kB,	rss=41124kB,	wss=0kB
+[12608.997020] virtual_mem=42020kB,	rss=41124kB,	wss=0kB
+[12610.992717] virtual_mem=2016kB,	rss=1124kB,	wss=64kB
+[12612.992580] virtual_mem=2016kB,	rss=1124kB,	wss=0kB
+[12614.992659] virtual_mem=2016kB,	rss=1124kB,	wss=32kB
+[12616.992939] task_struct is null
+[12625.050985] Module Unloaded.

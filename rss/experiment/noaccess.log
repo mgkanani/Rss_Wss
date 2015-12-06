@@ -1,0 +1,60 @@
+[ 5995.599641] Module inserted
+[ 5998.992384] virtual_mem=2012kB,	rss=904kB
+[ 6001.992643] virtual_mem=2012kB,	rss=904kB
+[ 6004.992453] virtual_mem=2012kB,	rss=904kB
+
+~4MB allocated so vma increased.
+
+[ 6007.992755] virtual_mem=6020kB,	rss=1104kB
+[ 6010.992665] virtual_mem=6020kB,	rss=1104kB
+
+~4MB freed so vma decreased , rss has very small change.
+
+[ 6013.992636] virtual_mem=2016kB,	rss=1100kB
+[ 6016.992493] virtual_mem=2016kB,	rss=1100kB
+
+~8MB new memory allocated, vma incresed but not rss
+
+[ 6019.992675] virtual_mem=10020kB,	rss=1104kB
+[ 6022.992706] virtual_mem=10020kB,	rss=1104kB
+
+~8MB deleted so vma decreased. so on ....
+
+[ 6025.992625] virtual_mem=2016kB,	rss=1100kB
+[ 6028.992634] virtual_mem=2016kB,	rss=1100kB
+[ 6031.996420] virtual_mem=14020kB,	rss=1104kB
+[ 6034.996275] virtual_mem=14020kB,	rss=1104kB
+[ 6037.992335] virtual_mem=2016kB,	rss=1100kB
+[ 6040.992649] virtual_mem=2016kB,	rss=1100kB
+[ 6043.992482] virtual_mem=18020kB,	rss=1104kB
+[ 6046.992393] virtual_mem=18020kB,	rss=1104kB
+[ 6049.992637] virtual_mem=2016kB,	rss=1100kB
+[ 6052.992500] virtual_mem=2016kB,	rss=1100kB
+[ 6055.992695] virtual_mem=22020kB,	rss=1104kB
+[ 6058.992704] virtual_mem=22020kB,	rss=1104kB
+[ 6061.992308] virtual_mem=2016kB,	rss=1100kB
+[ 6064.992507] virtual_mem=2016kB,	rss=1100kB
+[ 6067.992488] virtual_mem=26020kB,	rss=1104kB
+[ 6070.992529] virtual_mem=26020kB,	rss=1104kB
+[ 6073.992616] virtual_mem=2016kB,	rss=1100kB
+[ 6076.992532] virtual_mem=2016kB,	rss=1100kB
+[ 6079.992365] virtual_mem=30020kB,	rss=1104kB
+[ 6082.992588] virtual_mem=30020kB,	rss=1104kB
+[ 6085.992670] virtual_mem=2016kB,	rss=1100kB
+[ 6088.992522] virtual_mem=2016kB,	rss=1100kB
+[ 6091.992732] virtual_mem=34020kB,	rss=1104kB
+[ 6094.992299] virtual_mem=34020kB,	rss=1104kB
+[ 6097.992642] virtual_mem=2016kB,	rss=1100kB
+[ 6100.992636] virtual_mem=2016kB,	rss=1100kB
+[ 6103.992404] virtual_mem=38020kB,	rss=1104kB
+[ 6106.992725] virtual_mem=38020kB,	rss=1104kB
+[ 6109.992554] virtual_mem=2016kB,	rss=1100kB
+[ 6112.992658] virtual_mem=2016kB,	rss=1100kB
+[ 6115.992533] virtual_mem=42020kB,	rss=1104kB
+[ 6118.992731] virtual_mem=42020kB,	rss=1104kB
+[ 6121.992520] virtual_mem=2016kB,	rss=1100kB
+[ 6124.992367] virtual_mem=2016kB,	rss=1100kB
+[ 6127.992640] virtual_mem=2016kB,	rss=1100kB
+[ 6130.992512] virtual_mem=2016kB,	rss=1100kB
+[ 6133.992514] task_struct is NULL
+[ 6167.755491] Module Unloaded.
