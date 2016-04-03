@@ -88,9 +88,6 @@ Tree structure:-
 
 
 
-Declaration:-
-	I(Mahendra Kanani-133059006) and Nilang Shah have discussed different approaches for solving these problems. But we have not shared the code.
-
 Note:- The patch is for x86 architecture only.
 
 
@@ -98,4 +95,3 @@ Note:- The patch is for x86 architecture only.
 applying patch:-
 goto src directory of linux-3.18.1 and run below command.
 	patch -p1 < [location of "patch"file]
-
